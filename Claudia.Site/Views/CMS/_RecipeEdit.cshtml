@@ -1,0 +1,58 @@
+﻿@model Claudia.Domain.Models.v1.Recipe
+@{
+    Layout = "~/Views/CMS/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-horizontal">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CategoryId)
+            @Html.HiddenFor(model => model.DateTimeStamp)
+            <div class="form-group">
+                <p>Title of recipe:</p>
+                @Html.TextBoxFor(model => model.Title, new {@placeholder = "Insert title here", @required = "required", @maxlength = "200", @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div class="form-group">
+                <p>Created by:</p>
+                @Html.TextBoxFor(model => model.CreatedBy, new { @placeholder = "Your name here", @required = "required", @maxlength = "50", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CreatedBy)
+            </div>
+            <div class="form-group">
+                <p>Preparation time:</p>
+                @Html.TextBoxFor(model => model.PrepTime, new { @placeholder = "Example: 20 minutes", @required = "required", @maxlength = "50", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrepTime)
+            </div>
+            <div class="form-group">
+                <p>Ingredients:</p>
+                @Html.TextAreaFor(model => model.Ingredients, new { @placeholder = "Write ingredients here...", @required = "required", @class = "form-control", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Ingredients)
+            </div>
+            <div class="form-group">
+                <p>Directions:</p>
+                @Html.TextAreaFor(model => model.Directions, new { @placeholder = "Write directions here...", @required = "required", @class = "form-control", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Directions)
+            </div>
+            <div class="form-group">
+                <p>Yield:</p>
+                @Html.TextBoxFor(model => model.Serves, new { @placeholder = "Example: Serves 1", @required = "required", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Serves)
+            </div>
+            <div class="form-group">
+                <p>Upload image for the recipe:</p>
+                <input type="file" name="file" accept="image/*" />
+            </div>
+            <div class="form-group">
+                <p class="pull-right">
+                    <input type="submit" value="Save to database" class="btn btn-success" /> | @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+                </p>
+            </div>
+        </div>
+    </div>
+    }

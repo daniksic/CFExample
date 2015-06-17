@@ -1,0 +1,31 @@
+﻿@model Claudia.Domain.Models.v1.Recipe
+@{
+    ViewBag.Title = "Delete the recipe";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <h3>Are you sure you want to delete this?</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-group has-feedback">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.DisplayFor(modelItem => modelItem.Title)
+        </div>
+        <div class="form-group has-feedback">
+            @Html.LabelFor(model => model.CreatedBy)<br />
+            @Html.DisplayFor(modelItem => modelItem.CreatedBy)
+        </div>
+        <div class="form-group has-feedback">
+            @Html.LabelFor(model => model.Category)<br/>
+            @Html.DisplayFor(modelItem => modelItem.Category.Title)
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <input type="submit" value="Delete from database" class="btn btn-success" /> | @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>

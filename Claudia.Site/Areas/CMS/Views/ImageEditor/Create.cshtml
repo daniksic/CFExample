@@ -1,0 +1,81 @@
+﻿@model Claudia.Site.Areas.CMS.Models.ImageUploadViewModel
+
+@{
+    ViewBag.Title = "Insert new picture";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm("Create", "ImageEditor", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div style="display:none;">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.LinkId)
+            @Html.EditorFor(m => m.PictureCropCords)
+            @Html.EditorFor(m => m.PictureSize)
+            @Html.EditorFor(modelItem => modelItem.ImageUpload)
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl"/>
+        </div>
+        <div class="form-group">
+            <div id="ICTholder"></div>
+        </div>
+        <hr />
+        @*<div class="form-group text-center">
+            <input type="submit" value="Save to database" class="btn btn-success" />
+        </div>*@
+    }
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/cms/imagecroptool")
+    <script type="text/javascript">
+        //function getImageTool() {
+
+        var it = new ImageCropTool("#ICTholder");
+
+        //it.options.container.toolbox.buttons._choose.attr = {
+        //    "type": "file",
+        //    "accept": "image/*",
+        //    "style": "display:none;",
+        //    //"file-upload": ""
+        //    "id": "ImageUpload",
+        //    "name": "ImageUpload"
+        //};
+        it.options.container.toolbox.buttons.open.text = "Select picture";
+        it.options.container.toolbox.buttons.open.callback = function (file) {
+            if (it.Scenes[0]) {
+                it.Scenes[0].removeSelf();
+                it.Scenes = [];
+            }
+            var modelData = document.querySelector("#ICTholder");
+        };
+        it.options.container.toolbox.buttons._choose.externalElementRef = $("#ImageUpload")[0];
+        
+        it.options.control.toolbox.show = true;
+        it.options.control.toolbox.buttons.preview.show = false;
+
+        it.options.control.toolbox.buttons.save.show = true;
+        it.options.control.toolbox.buttons.save.callback = function (e) {
+            var cords = this.getCropCord();
+            var size = this.getOrginalSize();
+            $("#PictureCropCords_X")[0].value = cords.x;
+            $("#PictureCropCords_Y")[0].value = cords.y;
+            $("#PictureCropCords_W")[0].value = cords.w;
+            $("#PictureCropCords_H")[0].value = cords.h;
+            $("#PictureSize_W")[0].value = size.w;
+            $("#PictureSize_H")[0].value = size.h;
+            //$("#ImageUpload")[0].remove();
+            //    sendFile($("input[type=file]")[0].files[0]);
+        };
+        it.options.control.scene.input.show = false;
+
+        it.init();
+        //return it;
+        //}
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿<div class="container">
+    <div class="row">
+        <header class="page-header col-md-12">
+            <h2>Recipe categories list</h2>
+        </header>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                @* TODO: (DN) Izvući iz baze za svaku kategoriju ukupan broj recepata *@
+                <a href="#" class="list-group-item">Soups & Salads<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Desserts<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Cookies & Candy<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Appetizers & Beverages<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Breads & Rolls<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Vegetables & Side dishes<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">Main dishes<span class="badge">@* CountOfRecipes *@</span></a>
+                <a href="#" class="list-group-item">This & That<span class="badge">@* CountOfRecipes *@</span></a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <div class="col-md-2">
+                        <img class="img-circle" src="~/Images/recipe_menu_pic2.jpg" height="80" width="80" />
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            <strong>Ovdje ide naslov recepta</strong><br />
+                            <small><strong>Posted by:&nbsp;</strong>Claudia Floraunce <!-- ovdje treba iz baze izvući ime korisnika koje je napisao recept --></small>||
+                            <small><strong>Posted on:&nbsp;</strong>@DateTime.Now</small>
+                        </p>
+                        <em>ovdje ide kratak summary za recept koji se misli prikazati</em><br />
+                        <a href="#" class="text-info">Read more...</a>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="text-center">Rating</p>
+                        <div class="well well-sm text-center">
+                            <span>10 / 10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

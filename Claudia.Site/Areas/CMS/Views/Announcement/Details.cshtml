@@ -1,0 +1,31 @@
+﻿@model Claudia.Domain.Models.v1.Announcement
+@{
+    ViewBag.Title = "More details - ";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title@ViewBag.AnnTitle</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.DisplayFor(modelItem => modelItem.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Message)<br />
+            @Html.DisplayFor(modelItem => modelItem.Message)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTimeStamp)<br />
+            @Html.DisplayFor(modelItem => modelItem.DateTimeStamp)
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>
+

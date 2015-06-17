@@ -1,0 +1,45 @@
+﻿<section class="mainbar" data-ng-controller="carouseldetail as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <button class="btn btn-info" data-ng-click="vm.goBack()">
+                    <i class="glyphicon glyphicon-arrow-left"></i>Back
+                </button>
+                <button class="btn btn-info" data-ng-click="vm.cancel()" data-ng-disabled="!vm.canSave">
+                    <i class="glyphicon glyphicon-backward"></i>Cancel
+                </button>
+                <button class="btn btn-info" data-ng-click="vm.save()" data-ng-disabled="!vm.canSave">
+                    <i class="glyphicon glyphicon-save"></i>Save
+                </button>
+                <button class="btn btn-danger" data-ng-click="vm.delete()">
+                    <i class="glyphicon glyphicon-trash"></i>Delete
+                </button>
+                <span class="dissolve-animation ng-hide" data-ng-show="vm.hasChanges">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </span>
+            </div>
+
+            <div class="col-md-12">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.contentTitle}}" icon="{{vm.contentIcon}}"
+                         subtitle="{{vm.isNew ? 'new' : 'edit'}}"></div>
+                    <div class="widget-content">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input class="form-control" data-ng-model="model.title" placeholder="Picture title" data-z-validate/>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" data-ng-model="model.description" placeholder="Picture description" data-z-validate></textarea>
+                            </div>
+                            <img data-ng-show="!vm.isNew" data-ng-src="{{model.imageurl}}" />
+                        </form>
+
+                        <div id="imgtool"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

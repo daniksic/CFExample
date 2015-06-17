@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Claudia.Domain.Models.v1.Recipe>
+@{
+    Layout = "~/Views/CMS/_LayoutPage.cshtml";
+}
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <p class="pull-right">
+        @Html.ActionLink("Create new", "Create", new { entity = ViewBag.Entity }, new { @class = "btn btn-success" })
+    </p>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeStamp)
+            </th>
+            <th>Options</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeStamp)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

@@ -1,0 +1,14 @@
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Claudia.Domain.dll.config
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Claudia.Domain.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Claudia.Domain.pdb
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\obj\Debug\Claudia.Domain.dll
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\obj\Debug\Claudia.Domain.pdb
+C:\Users\Bla\Source\Workspaces\Claudia\Claudia\Claudia.Domain\obj\Debug\Claudia.Domain.csprojResolveAssemblyReference.cache

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Claudia.Domain.Models.v1.Comment>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div class="comments-area">
+    <h4 class="comments-title">Comments</h4>
+    @foreach (var item in Model)
+    {
+        <ol class="media-list comment-list">
+            <li class="media comment">
+                <img src="/Images/comment_icon.png" width="74" height="74" alt="" class="media-object pull-left img-circle">
+                <div class="media-body">
+                    <h4 class="media-heading author-vcard">
+                        <cite>@item.User.UserName</cite>
+                        <span class="comment-meta commentmetadata">on @item.DateTimeStamp</span>
+                    </h4>
+                    <p>@item.Text</p>
+                </div>
+            </li>
+        </ol>
+    }
+    <div class="text-center">
+        @Html.PagedListPager((IPagedList)ViewBag.onePageOfComments, page => Url.Action("Index", new { page }), PagedListRenderOptions.MinimalWithPageCountText)
+    </div>
+</div>
+    

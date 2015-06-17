@@ -1,0 +1,72 @@
+﻿@using Claudia.Site.Helpers
+@model Claudia.Site.Areas.CMS.Models.LinkRecipeViewModel
+@{
+    ViewBag.Title = "Edit recipe";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm("Edit", "Recipe", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Link.Id)
+        @Html.HiddenFor(model => model.Link.CategoryId)
+        @Html.HiddenFor(model => model.Recipe.LinkId)
+        @Html.HiddenFor(model => model.Recipe.UserId)
+        @Html.HiddenFor(model => model.Recipe.CategoryId)
+
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link.Title)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Link.Title, new { @placeholder = "Insert title here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Link.Title, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Link.Description)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Link.Description, new { @placeholder = "Insert title here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Link.Description, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe.CreatedBy)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Recipe.CreatedBy, new { @placeholder = "Insert your name here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Recipe.CreatedBy, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe.PrepTime)
+            @Html.TextBoxFor(modelItem => modelItem.Recipe.PrepTime, new { @placeholder = "Example: 20 minutes", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Recipe.PrepTime, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe.Ingredients)
+            @Html.TextAreaFor(modelItem => modelItem.Recipe.Ingredients, new { @required = "required", @class = "form-control input-medium", @rows = 5 })
+            @Html.ValidationMessageFor(model => model.Recipe.Ingredients, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe.Directions)
+            @Html.TextAreaFor(modelItem => modelItem.Recipe.Directions, new { @required = "required", @class = "form-control input-medium", @rows = 5 })
+            @Html.ValidationMessageFor(model => model.Recipe.Directions, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recipe.Serves)
+            @Html.TextBoxFor(modelItem => modelItem.Recipe.Serves, new { @placeholder = "Example: 5 people", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Recipe.Serves, null, new { @class = "text-danger" })
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <input type="submit" value="Save changes" class="btn btn-success" /> | @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+
+        <div>
+            @{
+        if (Model.Link.LinksUrls != null && Model.Link.LinksUrls.Any())
+        {
+            foreach (var t in Model.Link.LinksUrls)
+            {
+                @Html.Thumbnail("recipe", t.ServerFileName, null);
+            }
+        }
+            }
+        </div>
+    }
+</div>

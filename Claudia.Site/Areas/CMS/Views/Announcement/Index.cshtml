@@ -1,0 +1,44 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Claudia.Site.Areas.CMS.Models.LinkViewModel>
+@{
+    ViewBag.Title = "Announcements list";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <br />
+    <p class="pull-right">
+            @Html.ActionLink("Create new", "Create", new { entity = ViewBag.Entity }, new { @class = "btn btn-success" })
+        </p>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+            </th>
+            <th class="col-md-3">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th class="col-md-2">Options</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic)
+</div>
+

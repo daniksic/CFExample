@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claudia Floraunce - Showing people how to be beautiful at any size and age!</title>
+    <meta name="keywords" content="claudia floraunce, claudia, floraunce, photoshoot, live webcam, actress, model, plus size model, plus size, fashion, camera" />
+    <meta name="description" content="Hello, my name is Claudia Floraunce and this is my private website for showing you my beautifull plus size body and hope to become an actress." />
+    <link rel="icon" href="animated_favicon.gif" type="image/gif">
+    <link rel="shortcut icon" href="favicon.ico">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/googleAnalytics")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="~/Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static" role="navigation">
+        @*@if (User.Identity.IsAuthenticated)
+            {
+                <p class="navbar-text navbar-right">Signed in as <a href="~/Account/Manage" class="navbar-link">@User.Identity.Name</a>&nbsp;(<a href="~/Account/LogOff" class="text-info">Logout</a>)</p>
+            }
+            else
+            {
+                <p class="navbar-text navbar-right"><a href="~/Account/Login" class="navbar-link">Please sign in or register</a></p>
+            }*@
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand hidden-md hidden-lg" href="#">Claudia Floraunce</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="~/Home/Index"><span class="glyphicon glyphicon-home icon-white"></span>&nbsp;Homepage</a></li>
+                    <li><a href="~/Home/About"><span class="glyphicon glyphicon-user icon-white"></span>&nbsp;About me</a></li>
+                    <li><a href="~/Home/Gallery"><span class="glyphicon glyphicon-picture icon-white"></span>&nbsp;Photobook</a></li>
+                    <li>@*<a id="recipes" href="#" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Available soon"><span class="glyphicon glyphicon-list-alt icon-white"></span>&nbsp;Claudia Recipes</a>*@</li>
+                    <li><a id="recipes" href="~/Home/Recipes"><span class="glyphicon glyphicon-list-alt icon-white"></span>&nbsp;Claudia Recipes</a></li>
+                    <li>@*<a id="ask" href="#" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Available soon"><span class="glyphicon glyphicon-bullhorn icon-white"></span>&nbsp;Ask Claudia</a>*@</li>
+                    <li><a id="ask" href="~/Home/AskClaudia"><span class="glyphicon glyphicon-bullhorn icon-white"></span>&nbsp;Ask Claudia</a></li>
+                    <li><a href="~/Home/VideoBlog"><span class="glyphicon glyphicon-facetime-video icon-white"></span>&nbsp;Video blog</a></li>
+                    <li><a id="merchandise" href="#" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Available soon"><span class="glyphicon glyphicon-gift icon-white"></span>&nbsp;Merchandise</a></li>
+                    <li><a href="~/Home/Contact"><span class="glyphicon glyphicon-envelope icon-white"></span>&nbsp;Contact me</a></li>
+                    <li class="hidden-md hidden-lg"><a href="~/Account/Login"><span class="glyphicon glyphicon-log-in icon-white"></span>&nbsp;Register/Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @Html.Partial("_Carousel")
+    <div class="container-fluid" style="margin-top: 15px; background-color:#ffffff;">
+        @RenderBody()
+    </div>
+    <div class="container-fluid" style="background-color: #ECECEC;">
+        @Html.Partial("_Footer")
+    </div>
+    <div class="container" style="padding-top: 15px; margin: auto;">
+        <p class="text-center" style="color:#ffffff;"><small>Copyright (c) 2014 Claudiafloraunce.com. All rights reserved. Design & code by CodebaseProjects</small></p>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/galleria")
+    @RenderSection("scripts", required: false)
+    <script>
+        $('#carousel').carousel({ interval: 2000 });
+        $('#merchandise').popover({ trigger: 'click' });
+        $('#recipes').popover({ trigger: 'click' });
+        $('#ask').popover({ trigger: 'click' });
+    </script>
+</body>
+</html>

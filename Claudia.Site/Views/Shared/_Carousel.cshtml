@@ -1,0 +1,19 @@
+﻿@if (ViewBag.carouselModel != null && ViewBag.carouselModel.Count > 0)
+{
+    var tmp = ViewBag.carouselModel as IEnumerable<Claudia.Domain.Models.v1.Link>;
+    <div class="container hidden-xs hidden-sm">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="@Claudia.Domain.Configuration.AppConfig.ImageData.FirstOrDefault(i => i.Key == "carousel").Value.GetImageUrl(tmp.FirstOrDefault().ServerFileName)">
+                </div>
+                @foreach (var item in tmp.Skip(1))
+                {
+                    <div class="item">
+                        <img src="@Claudia.Domain.Configuration.AppConfig.ImageData.FirstOrDefault(i => i.Key == "carousel").Value.GetImageUrl(item.ServerFileName)">
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

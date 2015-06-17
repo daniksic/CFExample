@@ -1,0 +1,33 @@
+﻿@model Claudia.Domain.Models.v1.Link
+@{
+    ViewBag.Title = "Edit announcement";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @ViewBag.ImageUpload
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DateTimeStamp)
+
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Title, new { @placeholder = "Insert title here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)<br />
+            @Html.TextAreaFor(modelItem => modelItem.Description, new { @placeholder = "Insert your message here", @required = "required", @class = "form-control input-medium", @rows = "8" })
+            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <input type="submit" value="Save changes to database" class="btn btn-success" /> | @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>
+

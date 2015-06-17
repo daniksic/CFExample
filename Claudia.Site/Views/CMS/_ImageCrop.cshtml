@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/CMS/_LayoutPage.cshtml";
+}
+<div class="container">
+    <h2>Crop your image</h2>
+    <div class="col-md-12">
+        <div id="avatarCropTool"></div>
+    </div>
+</div>
+@section skripta{
+    <script type="text/javascript" src="~/Scripts/ImageCropTool.js"></script>
+    <script>
+        var avatarTool = new ImageCropTool("#avatarCropTool");
+        avatarTool.options.control.scene.edit.controls.edit.attr = { "width": 1000, "height": 800 };
+        avatarTool.options.control.scene.edit.controls.edit.selection.aspectRatio.lockRatio = true;
+
+        avatarTool.options.control.result.size = { "width": 63, "height": 42 };
+        avatarTool.init();
+    </script>
+}

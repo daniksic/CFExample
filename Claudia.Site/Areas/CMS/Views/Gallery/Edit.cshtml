@@ -1,0 +1,48 @@
+﻿@using Claudia.Site.Helpers
+@model Claudia.Site.Areas.CMS.Models.LinkViewModel
+@{
+    ViewBag.Title = "Edit image";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm("Edit","Gallery",FormMethod.Post))
+    {
+        <div class="form-group text-center">
+            @Html.BootstrapCancelButton("Cancel", "Index", "Gallery", null)
+            @Html.BootstrapSaveButton("Save changes")
+            @Html.BootstrapAddNewButton("Add picture", "Create", "ImageEditor", new RouteValueDictionary() { { "linkId", Model.Id }, { "returnUrl", Request.Url } })
+            @Html.BootstrapDeleteButton("Remove", "Delete", "Gallery", new RouteValueDictionary() { { "id", Model.Id } })
+        </div>
+        
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.CategoryId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Title, new { @placeholder = "Insert title here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Description, new { @placeholder = "Insert description here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+        </div>
+        <div>
+            @{
+        if (Model.Urls != null && Model.Urls.Any())
+        {
+            foreach (var t in Model.Urls)
+            {
+                @Html.Thumbnail("gallery", t.ServerFileName, null);
+            }
+        }
+            }
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

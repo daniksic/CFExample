@@ -1,0 +1,12 @@
+﻿@model  Claudia.Site.IWidget
+
+<div class="container">
+    @if (ViewBag.Widgets != null)
+    {
+        foreach (Claudia.Site.IWidget wm in ViewBag.Widgets)
+        {
+
+            @Html.Partial(string.Concat(new[] { "Widgets", "/", wm.WidgetName ?? "_Widget06" }), wm)
+        }
+    }
+</div>

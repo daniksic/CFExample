@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1EFB4332-BE13-430B-A6EA-81BA5B808371}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Claudia.Domain", "Claudia.Domain\Claudia.Domain.csproj", "{ADFF5768-E1B1-47BD-B39E-4F0AC875AF2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Claudia.Repository", "Claudia.Repository\Claudia.Repository.csproj", "{1C4A10F1-7942-42E3-9231-642843861D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Claudia.Site", "Claudia.Site\Claudia.Site.csproj", "{B141EE5F-AD6E-4B50-8206-D5D11F9D3934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Claudia.WebApi", "Claudia.WebApi\Claudia.WebApi.csproj", "{C007E5F3-DE99-49D8-A04B-78BDB4FBE753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Claudia.Web.Nancyfx", "Claudia.Web.Nancyfx\Claudia.Web.Nancyfx.csproj", "{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADFF5768-E1B1-47BD-B39E-4F0AC875AF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADFF5768-E1B1-47BD-B39E-4F0AC875AF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADFF5768-E1B1-47BD-B39E-4F0AC875AF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADFF5768-E1B1-47BD-B39E-4F0AC875AF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C4A10F1-7942-42E3-9231-642843861D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C4A10F1-7942-42E3-9231-642843861D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C4A10F1-7942-42E3-9231-642843861D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C4A10F1-7942-42E3-9231-642843861D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B141EE5F-AD6E-4B50-8206-D5D11F9D3934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B141EE5F-AD6E-4B50-8206-D5D11F9D3934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B141EE5F-AD6E-4B50-8206-D5D11F9D3934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B141EE5F-AD6E-4B50-8206-D5D11F9D3934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C007E5F3-DE99-49D8-A04B-78BDB4FBE753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C007E5F3-DE99-49D8-A04B-78BDB4FBE753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C007E5F3-DE99-49D8-A04B-78BDB4FBE753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C007E5F3-DE99-49D8-A04B-78BDB4FBE753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://backtrack.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Claudia.Domain\\Claudia.Domain.csproj
+		SccProjectName1 = Claudia.Domain
+		SccLocalPath1 = Claudia.Domain
+		SccProjectUniqueName2 = Claudia.Repository\\Claudia.Repository.csproj
+		SccProjectName2 = Claudia.Repository
+		SccLocalPath2 = Claudia.Repository
+		SccProjectUniqueName3 = Claudia.Site\\Claudia.Site.csproj
+		SccProjectName3 = Claudia.Site
+		SccLocalPath3 = Claudia.Site
+		SccProjectUniqueName4 = Claudia.WebApi\\Claudia.WebApi.csproj
+		SccProjectName4 = Claudia.WebApi
+		SccLocalPath4 = Claudia.WebApi
+		SccProjectUniqueName5 = Claudia.Web.Nancyfx\\Claudia.Web.Nancyfx.csproj
+		SccProjectName5 = Claudia.Web.Nancyfx
+		SccLocalPath5 = Claudia.Web.Nancyfx
+	EndGlobalSection
+EndGlobal

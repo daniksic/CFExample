@@ -1,0 +1,42 @@
+﻿@model Claudia.Domain.Models.v1.Recipe
+@{
+    ViewBag.Title = "More details - ";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title@ViewBag.RecipeTitle</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.DisplayFor(modelItem => modelItem.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy)<br />
+            @Html.DisplayFor(modelItem => modelItem.CreatedBy)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrepTime)<br />
+            @Html.DisplayFor(modelItem => modelItem.PrepTime)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ingredients)<br />
+            @Html.DisplayFor(modelItem => modelItem.Ingredients)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Directions)<br />
+            @Html.DisplayFor(modelItem => modelItem.Directions)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Serves)<br />
+            @Html.DisplayFor(modelItem => modelItem.Serves)
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>

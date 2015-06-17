@@ -1,0 +1,75 @@
+﻿<div class="container">
+    <div class="row">
+        <header class="page-header col-md-12">
+            <h2>Ask Claudia</h2>
+        </header>
+        <article class="col-md-12">
+            <figure class="text-center">
+                <img src="/Images/ask_claudia.jpg" class="img-responsive img-thumbnail">
+                <noscript>&lt;img src="/Images/ask_claudia.jpg" class="img-responsive img-thumbnail"&gt;</noscript>
+            </figure>
+            <br />
+            <div class="indented">
+                <p class="lead">
+                    Probably you have wondered how did i make all the things you see on my website. And i presume that you want to know how i did it... Well to be honest, it wasn't easy. The main thing is to have alot of confidence that doesn't come so easy.
+                    But some things just come if you wish for them in the right way.<br />
+                </p>
+                <p>
+                    I think i can help you at least giving you some tips how i did it, so this is the main reason for this page to have. Here you can ask me anything you want (i'll assume you will ask decently) so that i can try to answer with some words of wisdom.
+                </p>
+                <blockquote class="pulled-left">
+                    <p>Stop hating yourself for what you aren't and start loving yourself for what you are <small>Claudia</small></p>
+                </blockquote>
+                <p>
+                    Surely, it woun't be bulletproof answer but i surely hope that will have some impact on your personal of business life. Of course, positively :)<br />
+                    <br />
+                    Now, without further ado, please use the form below to ask :)<br /><br /> Thank you<br />
+                </p>
+                <hr />
+                <div class="col-md-12">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <h2>Ask a question</h2>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">E-mail:</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="E-mail" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMessage" class="col-sm-2 control-label">Question:</label>
+                                <div class="col-sm-10">
+                                    <textarea name="message" rows="5" class="form-control" id="inputMessage" placeholder="Enter your question here" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Ask Claudia</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Ask Claudia</h2>
+                                <div class="well text-center">
+                                    <span>Please <a href="~/Account/Login">sign in or register</a> to ask Claudia a question</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </article>
+    </div>
+</div>

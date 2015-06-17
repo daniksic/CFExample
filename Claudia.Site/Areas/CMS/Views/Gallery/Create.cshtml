@@ -1,0 +1,35 @@
+﻿@model Claudia.Site.Areas.CMS.Models.LinkViewModel
+@{
+    ViewBag.Title = "Insert new picture";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm("Create", "Gallery", FormMethod.Post@*, new { @enctype = "multipart/form-data" }*@))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.HiddenFor(m=>m.CategoryId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Title, new { @placeholder = "Insert title here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)<br />
+            @Html.TextBoxFor(modelItem => modelItem.Description, new { @placeholder = "Insert description here", @required = "required", @class = "form-control input-medium" })
+            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <input type="submit" value="Save to database" class="btn btn-success" /> | @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

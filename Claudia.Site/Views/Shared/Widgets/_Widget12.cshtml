@@ -1,0 +1,16 @@
+﻿@model  Claudia.Site.IWidget
+<div class="col-lg-12 col-md-12">
+    <hr />
+    @if (!Model.HeaderText.IsEmpty())
+    {
+        <h3>@Model.HeaderText</h3>
+    }
+
+    @Html.Partial(string.Concat(new[] { "Widgets", "/", @Model.SubWidget.WidgetName ?? "_SubWidget" }), @Model.SubWidget)
+
+    @if (!Model.FooterText.IsEmpty())
+    {
+        <a class="btn btn-info" href="@Model.FooterText"><span class="glyphicon glyphicon-hand-right icon-white"></span>&nbsp;visit page</a>
+    }
+</div>
+

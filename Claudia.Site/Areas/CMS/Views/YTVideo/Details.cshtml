@@ -1,0 +1,75 @@
+﻿@model Claudia.Domain.Models.v1.Link
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Link</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ObjectCategory.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObjectCategory.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServerFileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServerFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientLocalFileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientLocalFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTimeStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTimeStamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

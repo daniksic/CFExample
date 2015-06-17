@@ -1,0 +1,38 @@
+﻿@using Claudia.Site.Helpers
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claudia Floraunce - Showing people how to be beautiful at any size and age!</title>
+    <meta name="keywords" content="claudia floraunce, claudia, floraunce, photoshoot, live webcam, actress, model, plus size model, plus size, fashion, camera" />
+    <meta name="description" content="Hello, my name is Claudia Floraunce and this is my private website for showing you my beautifull plus size body and hope to become an actress." />
+    <link rel="icon" href="animated_favicon.gif" type="image/gif">
+    <link rel="shortcut icon" href="favicon.ico">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/googleAnalytics")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="~/Scripts/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @Html.Menu("CMS")
+
+    <div class="container-fluid" style="margin-top: 15px; background-color:#ffffff;">
+        @RenderBody()
+    </div>
+
+    <div class="container" style="padding-top: 15px; margin: auto;">
+        <p class="text-center" style="color:#ffffff;"><small>Copyright (c) @DateTime.Now.Year Claudiafloraunce.com. All rights reserved. Design & code by CodebaseProjects</small></p>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

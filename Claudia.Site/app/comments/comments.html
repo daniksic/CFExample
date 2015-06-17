@@ -1,0 +1,31 @@
+﻿<section class="mainbar" data-ng-controller="comments as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget wdarkred">
+                        <div data-cc-widget-header data-ng-bind-html="vm.title"></div>
+                        <div class="widget-content user">
+                            <div class="row btn-group">
+                                <a class="btn btn-info" href="#/youtube/new"><i class="glyphicon glyphicon-plus"></i><span>Add new</span></a>
+                            </div>
+                            <div class="row">
+                                <div class="<padd list-flow fader-animation" data-ng-repeat="d in vm.dataList">
+                                    <div class="">
+                                        <div class="">
+                                            <h6 data-ng-click="vm.goToDetail(t.id)">{{d.title}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

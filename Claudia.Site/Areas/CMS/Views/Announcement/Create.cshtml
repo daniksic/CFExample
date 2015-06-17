@@ -1,0 +1,39 @@
+﻿@model Claudia.Domain.Models.v1.Link
+@{
+    ViewBag.Title = "New announcement";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Announcement", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-horizontal">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DateTimeStamp)
+
+            <div class="form-group">
+                <p>Title of recipe:</p>
+                @Html.TextBoxFor(model => model.Title, new { @placeholder = "Insert title here", @required = "required", @maxlength = "200", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div class="form-group">
+                <p>Created by:</p>
+                @Html.TextAreaFor(model => model.Description, new { @placeholder = "Your message here", @required = "required", @maxlength = "50", @class = "form-control", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-group">
+                <p class="pull-right">
+                    <input type="submit" value="Save to database" class="btn btn-success" /> | @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

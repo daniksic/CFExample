@@ -1,0 +1,77 @@
+﻿<section id="dashboard-view" class="mainbar" data-ng-controller="dashboard as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="bviolet" data-ng-click="vm.gotoGallery()">
+                            <div class="pull-left"><i class="fa fa-picture-o"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.galleryCount}}</span> Gallery pictures
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                        <li class="bdarkred" data-ng-click="vm.gotoYoutube()">
+                            <div class="pull-left"><i class="fa fa-youtube"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.youtubeCount}}</span> YouTube movies
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <section id="auth-button"></section>
+                    <section id="view-selector"></section>
+                    <section id="timeline"></section>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="People"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Age</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="p in vm.people">
+                                        <td>{{p.firstName}}</td>
+                                        <td>{{p.lastName}}</td>
+                                        <td>{{p.age}}</td>
+                                        <td>{{p.location}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div data-cc-widget-header title="{{vm.news.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <small>{{vm.news.description}}</small>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </section>
+</section>

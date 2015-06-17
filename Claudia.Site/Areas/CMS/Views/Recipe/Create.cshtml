@@ -1,0 +1,69 @@
+﻿@model Claudia.Site.Areas.CMS.Models.LinkRecipeViewModel
+@{
+    ViewBag.Title = "Create new recipe";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Recipe", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-horizontal">
+            <h2>@ViewBag.Title</h2>
+            <hr />
+            @Html.ValidationSummary(false)
+            @Html.HiddenFor(model => model.Link.Id)
+            @Html.HiddenFor(model => model.Link.CategoryId)
+            @Html.HiddenFor(model => model.Recipe.Id)
+            <div class="form-group">
+                <p>Choose category:</p>
+                @Html.DropDownListFor(model => model.Recipe.CategoryId, new SelectList(ViewBag.RecipeCategoryItems, "Value", "Text"))
+            </div>
+            
+            <div class="form-group">
+                <p>Title of recipe:</p>
+                @Html.TextBoxFor(model => model.Link.Title, new { @placeholder = "Insert title here", @required = "required", @maxlength = "200", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Link.Title)
+            </div>
+            <div class="form-group">
+                <p>Description of recipe:</p>
+                @Html.TextBoxFor(model => model.Link.Description, new { @placeholder = "Insert title here", @required = "required", @maxlength = "200", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Link.Description)
+            </div>
+            <div class="form-group">
+                <p>Created by:</p>
+                @Html.TextBoxFor(model => model.Recipe.CreatedBy, new { @placeholder = "Your name here", @required = "required", @maxlength = "50", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Recipe.CreatedBy)
+            </div>
+            <div class="form-group">
+                <p>Preparation time:</p>
+                @Html.TextBoxFor(model => model.Recipe.PrepTime, new { @placeholder = "Example: 20 minutes", @required = "required", @maxlength = "50", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Recipe.PrepTime)
+            </div>
+            <div class="form-group">
+                <p>Ingredients:</p>
+                @Html.TextAreaFor(model => model.Recipe.Ingredients, new { @placeholder = "Write ingredients here...", @required = "required", @class = "form-control", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Recipe.Ingredients)
+            </div>
+            <div class="form-group">
+                <p>Directions:</p>
+                @Html.TextAreaFor(model => model.Recipe.Directions, new { @placeholder = "Write directions here...", @required = "required", @class = "form-control", @rows = "8" })
+                @Html.ValidationMessageFor(model => model.Recipe.Directions)
+            </div>
+            <div class="form-group">
+                <p>Yield:</p>
+                @Html.TextBoxFor(model => model.Recipe.Serves, new { @placeholder = "Example: Serves 1", @required = "required", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Recipe.Serves)
+            </div>
+            <div class="form-group">
+                <p class="pull-right">
+                    <input type="submit" value="Save to database" class="btn btn-success" /> | @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-danger" })
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

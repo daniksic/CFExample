@@ -1,0 +1,52 @@
+﻿@model Claudia.Domain.Models.v1.AskClaudia
+@{
+    ViewBag.Title = "Edit question";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.AnswerDate)
+
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(model => model.User)<br />
+            @Html.TextBoxFor(modelItem => modelItem.User, new { @disabled = "disabled", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.User, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateTimeStamp)<br />
+            @Html.DisplayFor(modelItem => modelItem.DateTimeStamp)
+            @Html.ValidationMessageFor(model => model.DateTimeStamp, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Question)
+            @Html.TextAreaFor(modelItem => modelItem.Question, new { @disabled = "disabled", @required = "required", @class = "form-control input-medium", @rows = 5 })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Answer)
+            @Html.TextAreaFor(modelItem => modelItem.Answer, new { @required = "required", @class = "form-control input-medium", @rows = 5 })
+            @Html.ValidationMessageFor(model => model.Answer, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label>Show / hide the question form the front page</label><br/>
+            @Html.CheckBoxFor(modelItem => modelItem.IsPrivate)
+            @Html.ValidationMessageFor(model => model.IsPrivate, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label>Check the question as answered</label><br/>
+            @Html.CheckBoxFor(modelItem => modelItem.IsAnswered)
+            @Html.ValidationMessageFor(model => model.IsAnswered, null, new { @class = "text-danger" })
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <input type="submit" value="Save changes to database" class="btn btn-success" /> | @Html.ActionLink("Back to list", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>
+

@@ -1,0 +1,61 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Claudia.Site.Models.AskClaudiaViewModel>
+
+@{
+    ViewBag.Title = "Ask Claudia - list of questions";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    <br/>
+    @*<p class="pull-right">
+        @Html.ActionLink("Create new", "Create", new { entity = ViewBag.Entity }, new { @class = "btn btn-success" })
+    </p>*@
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().User)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().DateTimeStamp)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().AnswerDate)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IsPrivate)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().IsAnswered)
+            </th>
+            <th class="col-md-2">Options</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeStamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnswerDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPrivate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAnswered)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic)
+</div>

@@ -1,0 +1,59 @@
+﻿@using Claudia.Site.Helpers
+@using PagedList.Mvc
+@model PagedList.IPagedList<Claudia.Site.Areas.CMS.Models.LinkViewModel>
+@*@model PagedList.IPagedList<Claudia.Domain.Models.v1.Link>*@
+
+@{
+    ViewBag.Title = "Photobook gallery";
+    Layout = "~/Areas/CMS/Views/Shared/_LayoutPage.cshtml";
+}
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <p class="pull-right">
+        @Html.ActionLink("Create new", "Create", new { entity = ViewBag.Entity }, new { @class = "btn btn-success" })
+    </p>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th class="col-md-3">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+            </th>
+            <th class="col-md-3">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+            </th>
+            <th class="col-md-3">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Urls)
+            </th>
+            <th class="col-md-3">Options</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @{
+                        if (item.Urls.Any())
+                        {
+                            foreach (var t in item.Urls)
+                            {
+                                @Html.Thumbnail("gallery", t.ServerFileName, null);
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                    @Html.ActionLink("Add picture", "Create", "ImageEditor", new { linkId = item.Id, returnUrl = Request.Url }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic)
+</div>

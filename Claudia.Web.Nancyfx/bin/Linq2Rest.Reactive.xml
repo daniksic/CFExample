@@ -1,0 +1,643 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>Linq2Rest.Reactive</name>
+  </assembly>
+  <members>
+    <member name="T:Linq2Rest.Reactive.AsyncExpressionProcessor">
+      <summary>
+            The default async expression processor implementation.
+            </summary>
+      <invariant>_writer != null</invariant>
+    </member>
+    <member name="T:Linq2Rest.Reactive.IAsyncExpressionProcessor">
+      <summary>
+            Defines the inteface for an expression processor.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.IAsyncExpressionProcessor.ProcessMethodCall``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <summary>
+            Processes the passed <see cref="T:System.Linq.Expressions.MethodCallExpression" /> and returns the result as an observable.
+            </summary>
+      <typeparam name="T">The generic <see cref="T:System.Type" /> of object returned in the <see cref="T:System.IObservable`1" />.</typeparam>
+      <param name="methodCall">The <see cref="T:System.Linq.Expressions.MethodCallExpression" /> to process.</param>
+      <param name="builder">The <see cref="T:Linq2Rest.Provider.ParameterBuilder" /> used to store values.</param>
+      <param name="resultLoader">The result loader function.</param>
+      <param name="intermediateResultLoader">The intermediate result loader function.</param>
+      <returns>An <see cref="T:System.IObservable`1" /> sequence with the result of the method call.</returns>
+      <requires csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+      <requires csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+      <requires csharp="intermediateResultLoader != null" vb="intermediateResultLoader &lt;&gt; Nothing">intermediateResultLoader != null</requires>
+    </member>
+    <member name="T:Linq2Rest.Reactive.IAsyncRestClient">
+      <summary>
+            Defines the public interface for an async REST client.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.IAsyncRestClient.Download">
+      <summary>
+            Gets a service response.
+            </summary>
+      <returns>The service response as a <see cref="T:System.Threading.Tasks.Task`1" />.</returns>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:Linq2Rest.Reactive.HttpMethod">
+      <summary>
+            Defines the public enumeration of supported HTTP methods.
+            </summary>
+    </member>
+    <member name="F:Linq2Rest.Reactive.HttpMethod.Get">
+      <summary>
+            Represents the GET HTTP method.
+            </summary>
+    </member>
+    <member name="F:Linq2Rest.Reactive.HttpMethod.Put">
+      <summary>
+            Represents the PUT HTTP method.
+            </summary>
+    </member>
+    <member name="F:Linq2Rest.Reactive.HttpMethod.Post">
+      <summary>
+            Represents the POST HTTP method.
+            </summary>
+    </member>
+    <member name="F:Linq2Rest.Reactive.HttpMethod.Delete">
+      <summary>
+            Represents the DELETE HTTP method.
+            </summary>
+    </member>
+    <member name="T:Linq2Rest.Reactive.IAsyncRestClientFactory">
+      <summary>
+            Defines the public interface for the async REST client factory.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.IAsyncRestClientFactory.Create(System.Uri)">
+      <summary>
+            Creates an <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" />.
+            </summary>
+      <param name="source">The <see cref="T:System.Uri" /> to download from.</param>
+      <returns>An <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" /> instance.</returns>
+      <requires exception="T:System.ArgumentNullException" csharp="source != (System.Uri)null" vb="source &lt;&gt; ((System.Uri)Nothing) ">source != (System.Uri)null</requires>
+      <exception cref="T:System.ArgumentNullException">!source != (System.Uri)null</exception>
+      <requires exception="T:System.ArgumentException" csharp="source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps" vb="source.Scheme = System.Uri.UriSchemeHttp  OrElse source.Scheme = System.Uri.UriSchemeHttps ">source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps</requires>
+      <exception cref="T:System.ArgumentException">!source.Scheme == System.Uri.UriSchemeHttp ? !source.Scheme == System.Uri.UriSchemeHttps : !true</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.IAsyncRestClientFactory.SetMethod(Linq2Rest.Reactive.HttpMethod)">
+      <summary>
+            Sets the HTTP method for the request.
+            </summary>
+      <param name="method">The <see cref="T:Linq2Rest.Reactive.HttpMethod" /> to set.</param>
+    </member>
+    <member name="M:Linq2Rest.Reactive.IAsyncRestClientFactory.SetInput(System.IO.Stream)">
+      <summary>
+            Sets the input data to send to the server.
+            </summary>
+      <param name="input">The input as a <see cref="T:System.IO.Stream" />.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="input != null" vb="input &lt;&gt; Nothing">input != null</requires>
+      <exception cref="T:System.ArgumentNullException">input == null</exception>
+    </member>
+    <member name="P:Linq2Rest.Reactive.IAsyncRestClientFactory.ServiceBase">
+      <summary>
+            Gets the base service address.
+            </summary>
+      <getter>
+        <ensures csharp="result != (System.Uri)null" vb="result &lt;&gt; ((System.Uri)Nothing) ">result != (System.Uri)null</ensures>
+        <ensures csharp="result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps" vb="result.Scheme = System.Uri.UriSchemeHttp  OrElse result.Scheme = System.Uri.UriSchemeHttps ">result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps</ensures>
+      </getter>
+    </member>
+    <member name="T:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory">
+      <summary>
+            Defines the factory to create a REST client using JSON requests.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.#ctor(System.Uri)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory" /> class.
+            </summary>
+      <param name="serviceBase">The base <see cref="T:System.Uri" /> for the REST service.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="serviceBase != (System.Uri)null" vb="serviceBase &lt;&gt; ((System.Uri)Nothing) ">serviceBase != (System.Uri)null</requires>
+      <exception cref="T:System.ArgumentNullException">!serviceBase != (System.Uri)null</exception>
+      <requires exception="T:System.ArgumentException" csharp="serviceBase.Scheme == System.Uri.UriSchemeHttp || serviceBase.Scheme == System.Uri.UriSchemeHttps" vb="serviceBase.Scheme = System.Uri.UriSchemeHttp  OrElse serviceBase.Scheme = System.Uri.UriSchemeHttps ">serviceBase.Scheme == System.Uri.UriSchemeHttp || serviceBase.Scheme == System.Uri.UriSchemeHttps</requires>
+      <exception cref="T:System.ArgumentException">!serviceBase.Scheme == System.Uri.UriSchemeHttp ? !serviceBase.Scheme == System.Uri.UriSchemeHttps : !true</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.Create(System.Uri)">
+      <summary>
+            Creates an <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" />.
+            </summary>
+      <param name="source">The <see cref="T:System.Uri" /> to download from.</param>
+      <returns>An <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" /> instance.</returns>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.Create(System.Uri)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentNullException" csharp="source != (System.Uri)null" vb="source &lt;&gt; ((System.Uri)Nothing) ">source != (System.Uri)null</requires>
+      <exception cref="T:System.ArgumentNullException">!source != (System.Uri)null</exception>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.Create(System.Uri)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentException" csharp="source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps" vb="source.Scheme = System.Uri.UriSchemeHttp  OrElse source.Scheme = System.Uri.UriSchemeHttps ">source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps</requires>
+      <exception cref="T:System.ArgumentException">!source.Scheme == System.Uri.UriSchemeHttp ? !source.Scheme == System.Uri.UriSchemeHttps : !true</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.SetMethod(Linq2Rest.Reactive.HttpMethod)">
+      <summary>
+            Sets the HTTP method for the request.
+            </summary>
+      <param name="method">The <see cref="T:Linq2Rest.Reactive.HttpMethod" /> to set.</param>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.SetInput(System.IO.Stream)">
+      <summary>
+            Sets the input data to send to the server.
+            </summary>
+      <param name="input">The input as a <see cref="T:System.IO.Stream" />.</param>
+      <ensures csharp="this._input != null" vb="Me._input &lt;&gt; Nothing">this._input != null</ensures>
+      <ensures csharp="input == this._input" vb="input = Me._input">input == this._input</ensures>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.SetInput(System.IO.Stream)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentNullException" csharp="input != null" vb="input &lt;&gt; Nothing">input != null</requires>
+      <exception cref="T:System.ArgumentNullException">input == null</exception>
+    </member>
+    <member name="P:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.ServiceBase">
+      <summary>
+            Gets the base service address.
+            </summary>
+      <getter>
+        <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.get_ServiceBase" inheritedFromTypeName="IAsyncRestClientFactory" csharp="result != (System.Uri)null" vb="result &lt;&gt; ((System.Uri)Nothing) ">result != (System.Uri)null</ensures>
+        <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.get_ServiceBase" inheritedFromTypeName="IAsyncRestClientFactory" csharp="result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps" vb="result.Scheme = System.Uri.UriSchemeHttp  OrElse result.Scheme = System.Uri.UriSchemeHttps ">result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps</ensures>
+      </getter>
+    </member>
+    <member name="T:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory">
+      <summary>
+            Defines the factory to create a REST client using XML requests.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.#ctor(System.Uri)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory" /> class.
+            </summary>
+      <param name="serviceBase">The base <see cref="T:System.Uri" /> for the REST service.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="serviceBase != (System.Uri)null" vb="serviceBase &lt;&gt; ((System.Uri)Nothing) ">serviceBase != (System.Uri)null</requires>
+      <exception cref="T:System.ArgumentNullException">!serviceBase != (System.Uri)null</exception>
+      <requires exception="T:System.ArgumentException" csharp="serviceBase.Scheme == System.Uri.UriSchemeHttp || serviceBase.Scheme == System.Uri.UriSchemeHttps" vb="serviceBase.Scheme = System.Uri.UriSchemeHttp  OrElse serviceBase.Scheme = System.Uri.UriSchemeHttps ">serviceBase.Scheme == System.Uri.UriSchemeHttp || serviceBase.Scheme == System.Uri.UriSchemeHttps</requires>
+      <exception cref="T:System.ArgumentException">!serviceBase.Scheme == System.Uri.UriSchemeHttp ? !serviceBase.Scheme == System.Uri.UriSchemeHttps : !true</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.Create(System.Uri)">
+      <summary>
+            Creates an <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" />.
+            </summary>
+      <param name="source">The <see cref="T:System.Uri" /> to download from.</param>
+      <returns>An <see cref="T:Linq2Rest.Reactive.IAsyncRestClient" /> instance.</returns>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.Create(System.Uri)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentNullException" csharp="source != (System.Uri)null" vb="source &lt;&gt; ((System.Uri)Nothing) ">source != (System.Uri)null</requires>
+      <exception cref="T:System.ArgumentNullException">!source != (System.Uri)null</exception>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.Create(System.Uri)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentException" csharp="source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps" vb="source.Scheme = System.Uri.UriSchemeHttp  OrElse source.Scheme = System.Uri.UriSchemeHttps ">source.Scheme == System.Uri.UriSchemeHttp || source.Scheme == System.Uri.UriSchemeHttps</requires>
+      <exception cref="T:System.ArgumentException">!source.Scheme == System.Uri.UriSchemeHttp ? !source.Scheme == System.Uri.UriSchemeHttps : !true</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.SetMethod(Linq2Rest.Reactive.HttpMethod)">
+      <summary>
+            Sets the HTTP method for the request.
+            </summary>
+      <param name="method">The <see cref="T:Linq2Rest.Reactive.HttpMethod" /> to set.</param>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.SetInput(System.IO.Stream)">
+      <summary>
+            Sets the input data to send to the server.
+            </summary>
+      <param name="input">The input as a <see cref="T:System.IO.Stream" />.</param>
+      <ensures csharp="this._input != null" vb="Me._input &lt;&gt; Nothing">this._input != null</ensures>
+      <ensures csharp="input == this._input" vb="input = Me._input">input == this._input</ensures>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.SetInput(System.IO.Stream)" inheritedFromTypeName="IAsyncRestClientFactory" exception="T:System.ArgumentNullException" csharp="input != null" vb="input &lt;&gt; Nothing">input != null</requires>
+      <exception cref="T:System.ArgumentNullException">input == null</exception>
+    </member>
+    <member name="P:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.ServiceBase">
+      <summary>
+            Gets the base service address.
+            </summary>
+      <getter>
+        <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.get_ServiceBase" inheritedFromTypeName="IAsyncRestClientFactory" csharp="result != (System.Uri)null" vb="result &lt;&gt; ((System.Uri)Nothing) ">result != (System.Uri)null</ensures>
+        <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClientFactory.get_ServiceBase" inheritedFromTypeName="IAsyncRestClientFactory" csharp="result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps" vb="result.Scheme = System.Uri.UriSchemeHttp  OrElse result.Scheme = System.Uri.UriSchemeHttps ">result.Scheme == System.Uri.UriSchemeHttp || result.Scheme == System.Uri.UriSchemeHttps</ensures>
+      </getter>
+    </member>
+    <member name="T:Linq2Rest.Reactive.InnerRestObservable`2">
+      <summary>
+            Defines an observable REST query.
+            </summary>
+      <typeparam name="TItem">The <see cref="T:System.Type" /> of object returned by the REST service.</typeparam>
+      <typeparam name="TSource">The <see cref="T:System.Type" /> of source item to derive aliasing from.</typeparam>
+      <invariant>_provider != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservableBase`2.Subscribe(System.IObserver{`0})">
+      <summary>
+            Notifies the provider that an observer is to receive notifications.
+            </summary>
+      <returns>
+            A reference to an interface that allows observers to stop receiving notifications before the provider has finished sending them.
+            </returns>
+      <param name="observer">The object that is to receive notifications.</param>
+      <requires inheritedFrom="M:System.IObservable`1.Subscribe(System.IObserver{`0})" inheritedFromTypeName="IObservable" csharp="observer != null" vb="observer &lt;&gt; Nothing">observer != null</requires>
+      <ensures inheritedFrom="M:System.IObservable`1.Subscribe(System.IObserver{`0})" inheritedFromTypeName="IObservable" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.ElementType">
+      <summary>
+            Gets the type of the element(s) that are returned when the expression tree associated with this instance of IQbservable is executed.
+            </summary>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.Expression">
+      <summary>
+            Gets the expression tree that is associated with the instance of IQbservable.
+            </summary>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.Provider">
+      <summary>
+            Gets the query provider that is associated with this data source.
+            </summary>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservable`2.Provider">
+      <summary>
+            Gets the query provider that is associated with this data source.
+            </summary>
+    </member>
+    <member name="T:Linq2Rest.Reactive.ObservableExtensions">
+      <summary>
+            Defines public extension methods on <see cref="T:System.IObservable`1" /></summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.Post``2(System.IObservable{``0},System.Func{``1})">
+      <summary>
+            Creates an <see cref="T:System.IObservable`1" /> over a POST request.
+            </summary>
+      <param name="source">The source <see cref="T:System.IObservable`1" />.</param>
+      <param name="input">A <see cref="T:System.Func`1" /> to generate POST data.</param>
+      <typeparam name="T">The <see cref="T:System.Type" /> of item in the <see cref="T:System.IObservable`1" />.</typeparam>
+      <typeparam name="TInput">The <see cref="T:System.Type" /> of item to POST to the server.</typeparam>
+      <returns>An <see cref="T:System.IObservable`1" /> instance.</returns>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.Put``2(System.IObservable{``0},System.Func{``1})">
+      <summary>
+            Creates an <see cref="T:System.IObservable`1" /> over a PUT request.
+            </summary>
+      <param name="source">The source <see cref="T:System.IObservable`1" />.</param>
+      <param name="input">A <see cref="T:System.Func`1" /> to generate PUT data.</param>
+      <typeparam name="T">The <see cref="T:System.Type" /> of item in the <see cref="T:System.IObservable`1" />.</typeparam>
+      <typeparam name="TInput">The <see cref="T:System.Type" /> of item to PUT on the server.</typeparam>
+      <returns>An <see cref="T:System.IObservable`1" /> instance.</returns>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.Delete``1(System.IObservable{``0})">
+      <summary>
+            Creates an <see cref="T:System.IObservable`1" /> over a DELETE request.
+            </summary>
+      <param name="source">The source <see cref="T:System.IObservable`1" />.</param>
+      <typeparam name="T">The <see cref="T:System.Type" /> of item in the <see cref="T:System.IObservable`1" />.</typeparam>
+      <returns>An <see cref="T:System.IObservable`1" /> instance.</returns>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.Expand``2(System.IObservable{``0},System.String)">
+      <summary>
+            Expands the specified source.
+            </summary>
+      <typeparam name="TSource" />
+      <typeparam name="TAlias">The <see cref="T:System.Type" /> to derive aliases from.</typeparam>
+      <param name="source">The source.</param>
+      <param name="paths">The paths to expand in the format "Child1, Child2/GrandChild2".</param>
+      <returns>An <see cref="T:System.IObservable`1" /> for continued querying.</returns>
+      <requires exception="T:System.ArgumentNullException" csharp="source != null" vb="source &lt;&gt; Nothing">source != null</requires>
+      <exception cref="T:System.ArgumentNullException">source == null</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.Expand``2(System.IObservable{``0},System.Linq.Expressions.Expression{System.Func{``1,System.Object}}[])">
+      <summary>
+            Expands the specified source.
+            </summary>
+      <typeparam name="TSource" />
+      <typeparam name="TAlias">The <see cref="T:System.Type" /> to derive aliases from.</typeparam>
+      <param name="source">The source.</param>
+      <param name="properties">The paths to expand.</param>
+      <returns>An <see cref="T:System.IObservable`1" /> for continued querying.</returns>
+      <requires exception="T:System.ArgumentNullException" csharp="source != null" vb="source &lt;&gt; Nothing">source != null</requires>
+      <exception cref="T:System.ArgumentNullException">source == null</exception>
+    </member>
+    <member name="T:Linq2Rest.Reactive.RestObservable`1">
+      <summary>
+            Defines an observable REST query.
+            </summary>
+      <typeparam name="T">The <see cref="T:System.Type" /> of object returned by the REST service.</typeparam>
+      <invariant>_restClientFactory != null</invariant>
+      <invariant>_serializerFactory != null</invariant>
+      <invariant>_memberNameResolver != null</invariant>
+      <invariant>_valueWriters != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestObservable`1.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory)">
+      <summary>
+            Initializes a new instance of the <see cref="T:Linq2Rest.Reactive.RestObservable`1" /> class.
+            </summary>
+      <param name="restClientFactory">An <see cref="T:Linq2Rest.Reactive.IAsyncRestClientFactory" /> to perform requests.</param>
+      <param name="serializerFactory">An <see cref="T:Linq2Rest.Provider.ISerializerFactory" /> to perform deserialization.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="restClientFactory != null" vb="restClientFactory &lt;&gt; Nothing">restClientFactory != null</requires>
+      <exception cref="T:System.ArgumentNullException">restClientFactory == null</exception>
+      <requires exception="T:System.ArgumentNullException" csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <exception cref="T:System.ArgumentNullException">serializerFactory == null</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestObservable`1.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter})">
+      <summary>
+            Initializes a new instance of the <see cref="T:Linq2Rest.Reactive.RestObservable`1" /> class.
+            </summary>
+      <param name="restClientFactory">An <see cref="T:Linq2Rest.Reactive.IAsyncRestClientFactory" /> to perform requests.</param>
+      <param name="serializerFactory">An <see cref="T:Linq2Rest.Provider.ISerializerFactory" /> to perform deserialization.</param>
+      <param name="memberNameResolver">An <see cref="T:Linq2Rest.IMemberNameResolver" /> for member name resolution.</param>
+      <param name="valueWriters">Custom value writers.</param>
+      <requires exception="T:System.ArgumentNullException" csharp="restClientFactory != null" vb="restClientFactory &lt;&gt; Nothing">restClientFactory != null</requires>
+      <exception cref="T:System.ArgumentNullException">restClientFactory == null</exception>
+      <requires exception="T:System.ArgumentNullException" csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <exception cref="T:System.ArgumentNullException">serializerFactory == null</exception>
+      <requires exception="T:System.ArgumentNullException" csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <exception cref="T:System.ArgumentNullException">memberNameResolver == null</exception>
+      <requires exception="T:System.ArgumentNullException" csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <exception cref="T:System.ArgumentNullException">valueWriters == null</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestObservable`1.Create">
+      <summary>
+            Creates an observable performing a single call to the defined service.
+            </summary>
+      <returns>An instance of an <see cref="T:System.Reactive.Linq.IQbservable`1" />.</returns>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestObservable`1.Poll(System.IObservable{System.Reactive.Unit})">
+      <summary>
+            Creates an observable performing calls when triggered.
+            </summary>
+      <param name="trigger">The trigger.</param>
+      <returns>An instance of an <see cref="T:System.Reactive.Linq.IQbservable`1" />.</returns>
+      <requires exception="T:System.ArgumentNullException" csharp="trigger != null" vb="trigger &lt;&gt; Nothing">trigger != null</requires>
+      <exception cref="T:System.ArgumentNullException">trigger == null</exception>
+    </member>
+    <member name="M:Linq2Rest.Reactive.TriggeredRestObservable`2.Subscribe(System.IObserver{`0})">
+      <summary>
+            Notifies the provider that an observer is to receive notifications.
+            </summary>
+      <returns>
+            A reference to an interface that allows observers to stop receiving notifications before the provider has finished sending them.
+            </returns>
+      <param name="observer">The object that is to receive notifications.</param>
+    </member>
+    <member name="P:Linq2Rest.Reactive.TriggeredRestObservable`2.Provider">
+      <summary>
+            Gets the query provider that is associated with this data source.
+            </summary>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.#ctor(Linq2Rest.Provider.IExpressionWriter,Linq2Rest.IMemberNameResolver)">
+      <requires csharp="writer != null" vb="writer &lt;&gt; Nothing">writer != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.ProcessMethodCall``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncExpressionProcessor.ProcessMethodCall``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})" inheritedFromTypeName="IAsyncExpressionProcessor" csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncExpressionProcessor.ProcessMethodCall``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})" inheritedFromTypeName="IAsyncExpressionProcessor" csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.IAsyncExpressionProcessor.ProcessMethodCall``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})" inheritedFromTypeName="IAsyncExpressionProcessor" csharp="intermediateResultLoader != null" vb="intermediateResultLoader &lt;&gt; Nothing">intermediateResultLoader != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.InvokeEager``1(System.Linq.Expressions.MethodCallExpression,System.Object)">
+      <requires csharp="methodCall != null" vb="methodCall &lt;&gt; Nothing">methodCall != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.ResolveInvocationParameters(System.Collections.IEnumerable,System.Type,System.Linq.Expressions.MethodCallExpression)">
+      <requires csharp="results != null" vb="results &lt;&gt; Nothing">results != null</requires>
+      <requires csharp="type != (System.Type)null" vb="type &lt;&gt; ((System.Type)Nothing) ">type != (System.Type)null</requires>
+      <requires csharp="methodCall != null" vb="methodCall &lt;&gt; Nothing">methodCall != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.ProcessMethodCallInternal``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <requires csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+      <requires csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.GetMethodResult``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <requires csharp="new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass9&lt;T&gt;(){&#xD;&#xA;    methodCall = methodCall, &#xD;&#xA;}.methodCall != null" vb="(() =&gt; {&#xD;&#xA;    Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass9&lt;T&gt; local_3_prime = New Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass9(Of T)();&#xD;&#xA;    (local_3_prime.methodCall = methodCall)&#xD;&#xA;    return local_3_prime; })().methodCall &lt;&gt; Nothing">new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass9&lt;T&gt;(){
+    methodCall = methodCall, 
+}.methodCall != null</requires>
+      <requires csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+      <requires csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.GetResult``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <requires csharp="new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClassc&lt;T&gt;(){&#xD;&#xA;    methodCall = methodCall, &#xD;&#xA;}.methodCall != null" vb="(() =&gt; {&#xD;&#xA;    Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClassc&lt;T&gt; local_0_prime = New Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClassc(Of T)();&#xD;&#xA;    (local_0_prime.methodCall = methodCall)&#xD;&#xA;    return local_0_prime; })().methodCall &lt;&gt; Nothing">new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClassc&lt;T&gt;(){
+    methodCall = methodCall, 
+}.methodCall != null</requires>
+      <requires csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+      <requires csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.ExecuteMethod``1(System.Linq.Expressions.MethodCallExpression,Linq2Rest.Provider.ParameterBuilder,System.Func{Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.Generic.IEnumerable{``0}}},System.Func{System.Type,Linq2Rest.Provider.ParameterBuilder,System.IObservable{System.Collections.IEnumerable}})">
+      <requires csharp="new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass10&lt;T&gt;(){&#xD;&#xA;    methodCall = methodCall, &#xD;&#xA;}.methodCall != null" vb="(() =&gt; {&#xD;&#xA;    Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass10&lt;T&gt; local_4_prime = New Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass10(Of T)();&#xD;&#xA;    (local_4_prime.methodCall = methodCall)&#xD;&#xA;    return local_4_prime; })().methodCall &lt;&gt; Nothing">new Linq2Rest.Reactive.AsyncExpressionProcessor.&lt;&gt;c__DisplayClass10&lt;T&gt;(){
+    methodCall = methodCall, 
+}.methodCall != null</requires>
+      <requires csharp="resultLoader != null" vb="resultLoader &lt;&gt; Nothing">resultLoader != null</requires>
+      <requires csharp="intermediateResultLoader != null" vb="intermediateResultLoader &lt;&gt; Nothing">intermediateResultLoader != null</requires>
+      <requires csharp="builder != null" vb="builder &lt;&gt; Nothing">builder != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.AsyncExpressionProcessor.ResolveProjection(Linq2Rest.Provider.ParameterBuilder,System.Linq.Expressions.LambdaExpression,System.Type)">
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        System.Func&lt;System.Reflection.MemberInfo, string&gt; local_2 = (System.Func&lt;System.Reflection.MemberInfo, string&gt;)null;&#xD;&#xA;        System.Func&lt;System.Reflection.MemberInfo, string&gt; local_3 = (System.Func&lt;System.Reflection.MemberInfo, string&gt;)null;&#xD;&#xA;    }&#xD;&#xA;    return lambdaExpression != null; })()" vb="(() =&gt; {&#xD;&#xA;    System.Func&lt;System.Reflection.MemberInfo, string&gt; local_2 = ((System.Func(Of System.Reflection.MemberInfo, String))Nothing);&#xD;&#xA;    System.Func&lt;System.Reflection.MemberInfo, string&gt; local_3 = ((System.Func(Of System.Reflection.MemberInfo, String))Nothing);&#xD;&#xA;    return lambdaExpression &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        System.Func&lt;System.Reflection.MemberInfo, string&gt; local_2 = (System.Func&lt;System.Reflection.MemberInfo, string&gt;)null;
+        System.Func&lt;System.Reflection.MemberInfo, string&gt; local_3 = (System.Func&lt;System.Reflection.MemberInfo, string&gt;)null;
+    }
+    return lambdaExpression != null; })()</requires>
+    </member>
+    <member name="T:Linq2Rest.Reactive.RestSubscription`1">
+      <invariant>_observer != null</invariant>
+      <invariant>_unsubscription != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestSubscription`1.#ctor(System.IObserver{`0},System.Action{System.IObserver{`0}})">
+      <requires csharp="observer != null" vb="observer &lt;&gt; Nothing">observer != null</requires>
+      <requires csharp="unsubscription != null" vb="unsubscription &lt;&gt; Nothing">unsubscription != null</requires>
+    </member>
+    <member name="T:Linq2Rest.Reactive.TriggeredRestQueryableProvider`1">
+      <invariant>_trigger != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.TriggeredRestQueryableProvider`1.#ctor(System.IObservable{System.Reactive.Unit},Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="trigger != null" vb="trigger &lt;&gt; Nothing">trigger != null</requires>
+      <requires csharp="asyncRestClient != null" vb="asyncRestClient &lt;&gt; Nothing">asyncRestClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.TriggeredRestQueryableProvider`1.#ctor(System.IObservable{System.Reactive.Unit},Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="trigger != null" vb="trigger &lt;&gt; Nothing">trigger != null</requires>
+      <requires csharp="asyncRestClient != null" vb="asyncRestClient &lt;&gt; Nothing">asyncRestClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.TriggeredRestQueryableProvider`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+      <ensures inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:Linq2Rest.Reactive.TriggeredRestObservable`2">
+      <invariant>_trigger != null</invariant>
+      <invariant>_provider != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.TriggeredRestObservable`2.#ctor(System.IObservable{System.Reactive.Unit},Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="restClient != null" vb="restClient &lt;&gt; Nothing">restClient != null</requires>
+      <requires csharp="trigger != null" vb="trigger &lt;&gt; Nothing">trigger != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestQueryableProvider`1.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="asyncRestClient != null" vb="asyncRestClient &lt;&gt; Nothing">asyncRestClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestQueryableProvider`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+      <ensures inheritedFrom="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)" inheritedFromTypeName="RestQueryableProviderBase" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.AsyncXmlRestClient">
+      <invariant>_uri != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.AsyncXmlRestClient.#ctor(System.Uri,Linq2Rest.Reactive.HttpMethod,System.IO.Stream)">
+      <requires csharp="uri != (System.Uri)null" vb="uri &lt;&gt; ((System.Uri)Nothing) ">uri != (System.Uri)null</requires>
+      <requires csharp="uri.Scheme == System.Uri.UriSchemeHttp || uri.Scheme == System.Uri.UriSchemeHttps" vb="uri.Scheme = System.Uri.UriSchemeHttp  OrElse uri.Scheme = System.Uri.UriSchemeHttps ">uri.Scheme == System.Uri.UriSchemeHttp || uri.Scheme == System.Uri.UriSchemeHttps</requires>
+      <ensures csharp="uri == this._uri" vb="uri = Me._uri ">uri == this._uri</ensures>
+      <ensures csharp="method == this._method" vb="method = Me._method">method == this._method</ensures>
+      <ensures csharp="input == this._input" vb="input = Me._input">input == this._input</ensures>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncXmlRestClientFactory.AsyncXmlRestClient.Download">
+      <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClient.Download" inheritedFromTypeName="IAsyncRestClient" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.AsyncJsonRestClient">
+      <invariant>_uri != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.AsyncJsonRestClient.#ctor(System.Uri,Linq2Rest.Reactive.HttpMethod,System.IO.Stream)">
+      <requires csharp="uri != (System.Uri)null" vb="uri &lt;&gt; ((System.Uri)Nothing) ">uri != (System.Uri)null</requires>
+      <requires csharp="uri.Scheme == System.Uri.UriSchemeHttp || uri.Scheme == System.Uri.UriSchemeHttps" vb="uri.Scheme = System.Uri.UriSchemeHttp  OrElse uri.Scheme = System.Uri.UriSchemeHttps ">uri.Scheme == System.Uri.UriSchemeHttp || uri.Scheme == System.Uri.UriSchemeHttps</requires>
+      <ensures csharp="uri == this._uri" vb="uri = Me._uri ">uri == this._uri</ensures>
+      <ensures csharp="method == this._method" vb="method = Me._method">method == this._method</ensures>
+      <ensures csharp="input == this._input" vb="input = Me._input">input == this._input</ensures>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.AsyncJsonRestClient.Download">
+      <ensures inheritedFrom="M:Linq2Rest.Reactive.IAsyncRestClient.Download" inheritedFromTypeName="IAsyncRestClient" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.AsyncJsonRestClient.GetResponse(System.Threading.Tasks.Task{System.Net.HttpWebRequest})">
+      <requires csharp="r != null" vb="r &lt;&gt; Nothing">r != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.Implementations.AsyncJsonRestClientFactory.AsyncJsonRestClient.WriteRequestStream(System.Threading.Tasks.Task{System.IO.Stream})">
+      <requires csharp="s != null" vb="s &lt;&gt; Nothing">s != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InternalObservableExtensions.ToQbservable(System.Collections.IEnumerable,System.Type)">
+      <requires csharp="enumerable != null" vb="enumerable &lt;&gt; Nothing">enumerable != null</requires>
+      <requires csharp="type != (System.Type)null" vb="type &lt;&gt; ((System.Type)Nothing) ">type != (System.Type)null</requires>
+    </member>
+    <member name="T:Linq2Rest.Reactive.ObserverPublisher`1">
+      <invariant>_observers != null</invariant>
+      <invariant>_observerScheduler != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObserverPublisher`1.#ctor(System.Collections.Generic.IEnumerable{System.IObserver{`0}},System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="observers != null" vb="observers &lt;&gt; Nothing">observers != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObserverPublisher`1.OnError(System.Exception)">
+      <requires inheritedFrom="M:System.IObserver`1.OnError(System.Exception)" inheritedFromTypeName="IObserver" csharp="error != null" vb="error &lt;&gt; Nothing">error != null</requires>
+    </member>
+    <member name="T:Linq2Rest.Reactive.InnerRestObservableBase`2">
+      <invariant>_restClient != null</invariant>
+      <invariant>_serializerFactory != null</invariant>
+      <invariant>Observers != null</invariant>
+      <invariant>SubscriberScheduler != null</invariant>
+      <invariant>ObserverScheduler != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservableBase`2.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="restClient != null" vb="restClient &lt;&gt; Nothing">restClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservableBase`2.SetInput(System.IO.Stream)">
+      <requires csharp="stream != null" vb="stream &lt;&gt; Nothing">stream != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservableBase`2.GetResults(Linq2Rest.Provider.ParameterBuilder)">
+      <requires csharp="new Linq2Rest.Reactive.InnerRestObservableBase&lt;T, TSource&gt;.&lt;&gt;c__DisplayClassb(){&#xD;&#xA;    builder = builder, &#xD;&#xA;    &lt;&gt;4__this = this, &#xD;&#xA;}.builder != null" vb="(() =&gt; {&#xD;&#xA;    Linq2Rest.Reactive.InnerRestObservableBase&lt;T, TSource&gt;.&lt;&gt;c__DisplayClassb local_2_prime = New Linq2Rest.Reactive.InnerRestObservableBase(Of T, TSource).&lt;&gt;c__DisplayClassb();&#xD;&#xA;    (local_2_prime.builder = builder)&#xD;&#xA;    (local_2_prime.&lt;&gt;4__this = Me)&#xD;&#xA;    return local_2_prime; })().builder &lt;&gt; Nothing">new Linq2Rest.Reactive.InnerRestObservableBase&lt;T, TSource&gt;.&lt;&gt;c__DisplayClassb(){
+    builder = builder, 
+    &lt;&gt;4__this = this, 
+}.builder != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservableBase`2.ReadResponse(System.IO.Stream,System.Type)">
+      <requires csharp="stream != null" vb="stream &lt;&gt; Nothing">stream != null</requires>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.Observers">
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+      <setter>
+        <requires csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+      </setter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.ObserverScheduler">
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+      <setter>
+        <requires csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+      </setter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.InnerRestObservableBase`2.SubscriberScheduler">
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+      <setter>
+        <requires csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+      </setter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.ReflectionHelper.GenericCreateMethod">
+      <getter>
+        <ensures csharp="result != (System.Reflection.MethodInfo)null" vb="result &lt;&gt; ((System.Reflection.MethodInfo)Nothing) ">result != (System.Reflection.MethodInfo)null</ensures>
+      </getter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.ReflectionHelper.AliasGenericCreateMethod">
+      <getter>
+        <ensures csharp="result != (System.Reflection.MethodInfo)null" vb="result &lt;&gt; ((System.Reflection.MethodInfo)Nothing) ">result != (System.Reflection.MethodInfo)null</ensures>
+      </getter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.ReflectionHelper.CreateMethod">
+      <getter>
+        <ensures csharp="result != (System.Reflection.MethodInfo)null" vb="result &lt;&gt; ((System.Reflection.MethodInfo)Nothing) ">result != (System.Reflection.MethodInfo)null</ensures>
+      </getter>
+    </member>
+    <member name="T:Linq2Rest.Reactive.RestQueryableProviderBase`1">
+      <invariant>_asyncRestClient != null</invariant>
+      <invariant>_serializerFactory != null</invariant>
+      <invariant>_subscriberScheduler != null</invariant>
+      <invariant>_observerScheduler != null</invariant>
+      <invariant>MemberNameResolver != null</invariant>
+      <invariant>ValueWriters != null</invariant>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="asyncRestClient != null" vb="asyncRestClient &lt;&gt; Nothing">asyncRestClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.RestQueryableProviderBase`1.CreateQbservable``1(System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="P:Linq2Rest.Reactive.RestQueryableProviderBase`1.MemberNameResolver">
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+      <setter>
+        <requires csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+      </setter>
+    </member>
+    <member name="P:Linq2Rest.Reactive.RestQueryableProviderBase`1.ValueWriters">
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+      <setter>
+        <requires csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+      </setter>
+    </member>
+    <member name="M:Linq2Rest.Reactive.ObservableExtensions.ResolvePropertyName``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+      <requires csharp="property != null" vb="property &lt;&gt; Nothing">property != null</requires>
+    </member>
+    <member name="M:Linq2Rest.Reactive.InnerRestObservable`2.#ctor(Linq2Rest.Reactive.IAsyncRestClientFactory,Linq2Rest.Provider.ISerializerFactory,Linq2Rest.IMemberNameResolver,System.Collections.Generic.IEnumerable{Linq2Rest.Provider.Writers.IValueWriter},System.Linq.Expressions.Expression,System.Reactive.Concurrency.IScheduler,System.Reactive.Concurrency.IScheduler)">
+      <requires csharp="restClient != null" vb="restClient &lt;&gt; Nothing">restClient != null</requires>
+      <requires csharp="serializerFactory != null" vb="serializerFactory &lt;&gt; Nothing">serializerFactory != null</requires>
+      <requires csharp="memberNameResolver != null" vb="memberNameResolver &lt;&gt; Nothing">memberNameResolver != null</requires>
+      <requires csharp="valueWriters != null" vb="valueWriters &lt;&gt; Nothing">valueWriters != null</requires>
+      <requires csharp="subscriberScheduler != null" vb="subscriberScheduler &lt;&gt; Nothing">subscriberScheduler != null</requires>
+      <requires csharp="observerScheduler != null" vb="observerScheduler &lt;&gt; Nothing">observerScheduler != null</requires>
+    </member>
+  </members>
+</doc>

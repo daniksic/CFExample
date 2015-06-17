@@ -1,0 +1,59 @@
+﻿<section class="mainbar" data-ng-controller="gallery as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-search">
+                        <div class="">
+                            <input class="input-medium search-query" data-ng-model="vm.listSearch"
+                                   data-ng-keyup="vm.search($event)" placeholder="live search...">
+                            <div class="btn-group">
+                                <a class="btn btn-info" href="#/gallery/new"><i class="glyphicon glyphicon-plus"></i><span>Add new</span></a>
+                                <a class="btn btn-info" data-ng-click="vm.refresh()"><i class="glyphicon glyphicon-refresh"></i><span>Refresh</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="{{vm.contentTitle}}" icon="{{vm.contentIcon}}" 
+                             subtitle="{{vm.listFilteredCount}} / {{vm.listCount}}"
+                             right-text="Page {{vm.currentPage}} of {{vm.pageCount}}"></div>
+                        <div class="widget-content">
+                            <div class="row">
+                                <div class="<padd list-flow fader-animation" data-ng-repeat="t in vm.list">
+                                    <div class="pic-polaroid" data-ng-click="vm.goToDetail(t.id)">
+                                        <img ng-src="{{t.imageurl}}" />
+                                        <div>
+                                            <h6>{{t.shortTitle}}</h6>
+                                        </div>
+                                        <div>
+                                            <h6><small>{{t.dateTimeStamp | date: 'mediumDate'}}</small></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                            <pagination boundary-links="true"
+                                        on-select-page="vm.pageChanged(page)"
+                                        total-items="vm.listFilteredCount"
+                                        items-per-page="vm.pageSize"
+                                        page="vm.currentPage"
+                                        max-size="vm.maxPagesToShow"
+                                        class="pagination-small"
+                                        previous-text="Prev"
+                                        next-text="Next"
+                                        first-text="First"
+                                        last-text="Last"></pagination>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
